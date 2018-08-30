@@ -1,0 +1,5 @@
+homepage: https://www.qt.io/
+primary_contact: albert.astals.cid@kdab.com
+sanitizers:
+  - address
+  - undefined
