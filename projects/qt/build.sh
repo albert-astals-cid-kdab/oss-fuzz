@@ -19,6 +19,9 @@ pushd $SRC/qtbase
 sed -i -e "s/QMAKE_CXXFLAGS    += -stdlib=libc++/QMAKE_CXXFLAGS    += -stdlib=libc++ $CXXFLAGS/g" mkspecs/linux-clang-libc++/qmake.conf
 sed -i -e "s/QMAKE_LFLAGS      += -stdlib=libc++/QMAKE_LFLAGS      += -stdlib=libc++ $CXXFLAGS/g" mkspecs/linux-clang-libc++/qmake.conf
 
+# Disable rtti_off in harfbuzz, sanitize doesn't like it
+sed -i -e "s/exceptions_off rtti_off warn_off/exceptions_off warn_off/g" ./src/3rdparty/harfbuzz-ng/harfbuzz-ng.pro
+
 # Disable compressing rcc files, triggers a warning in the memory sanitizer that i'm not sure is valid. TODO investigate properly
 # sed -i -e "s/DEFINES += QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/DEFINES += QT_NO_COMPRESS QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/g" src/tools/rcc/rcc.pro
 
