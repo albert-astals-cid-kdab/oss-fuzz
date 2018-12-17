@@ -20,7 +20,7 @@ sed -i -e "s/QMAKE_CXXFLAGS    += -stdlib=libc++/QMAKE_CXXFLAGS    += -stdlib=li
 sed -i -e "s/QMAKE_LFLAGS      += -stdlib=libc++/QMAKE_LFLAGS      += -stdlib=libc++ $CXXFLAGS/g" mkspecs/linux-clang-libc++/qmake.conf
 
 # Disable compressing rcc files, triggers a warning in the memory sanitizer that i'm not sure is valid. TODO investigate properly
-sed -i -e "s/DEFINES += QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/DEFINES += QT_NO_COMPRESS QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/g" src/tools/rcc/rcc.pro
+# sed -i -e "s/DEFINES += QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/DEFINES += QT_NO_COMPRESS QT_RCC QT_NO_CAST_FROM_ASCII QT_NO_FOREACH/g" src/tools/rcc/rcc.pro
 
 ./configure --glib=no --libpng=qt -developer-build -opensource -confirm-license -static -no-opengl -no-icu -platform linux-clang-libc++
 make -j$(nproc) sub-src
